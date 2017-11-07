@@ -1,6 +1,6 @@
 $location = "southcentralus"
 $group = "PacktPublishing"
-New-AzureRmResourceGroup -Name $group -Location southcentralus
+New-AzureRmResourceGroup -Name $group -Location $location
 
 # Create Virtual Network and Related Subnets
 $vnet = New-AzureRmVirtualNetwork -Name vnet-packt -ResourceGroupName $group -Location $location `
