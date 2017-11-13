@@ -1,8 +1,8 @@
 ## Synopsis
 
-This is one project of two projects that makes up the Suspicious Activity Bot Application for Azure Commerical and Government. This particular project contains the actual Bot application used by users to post a suspicious activity. It makes a REST API call to the POST method within the hotline api project. A full description of the project can be found in the following blog post: [Deploying a Suspicious Activity Bot in Azure Commercial or Azure Government](https://blogs.msdn.microsoft.com/cloud_solution_architect/2017/05/16/deploying-a-suspicious-activity-bot-in-azure-commercial-or-azure-government)
-
-NOTE: Please not that this project was created using the Console Channel as I do not have the necessary business subscriptions to configure it for other channels. You will need to modify the code if you would like to productionize this bot for Skype, Facebook Messenger, or Skype for Business. 
+This repository was created as a way to provide access to the script files that were create during the demonstration
+videos within the Mastering Azure series presented by Packt Publishing. All files were written by the author and fully
+tested within a standard Azure VS Code environment.
 
 ## Motivation
 
@@ -14,8 +14,9 @@ Download the files to a local directory and then reference them inside of a Shel
 
 ## Built With
 
-* [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) - Pythone based shell scripting for Azure
-* [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/azure/overview?view=azurermps-4.4.1] - The PowerShell framework for working with Azure
+* [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) - Python based shell scripting for Azure
+* [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/azure/overview?view=azurermps-4.4.1) - The PowerShell framework for working with Azure
+* [VS Code](https://code.visualstudio.com/) - The free IDE provided by Microsoft. It can provide a scripting development environment with integrated terminal for testing. 
 
 ## Code Example
 
