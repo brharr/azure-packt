@@ -20,9 +20,9 @@ $bastionip = New-AzureRmPublicIpAddress -Name BastionIP -ResourceGroupName $grou
 
 # Only need to create one of the Load Balancers: Internal. The external gets created by the VM Scale Set
 $dbfrontendip = New-AzureRmLoadBalancerFrontendIpConfig -Name DBFrontEnd -Subnet $vnet.Subnets[2]
-$dbhealthprobe = New-AzureRmLoadBalancerProbeConfig -Name WebHealthProbe -Protocol Tcp -Port 3306 -IntervalInSeconds 30 `
+$dbhealthprobe = New-AzureRmLoadBalancerProbeConfig -Name DBHealthProbe -Protocol Tcp -Port 3306 -IntervalInSeconds 30 `
                 -ProbeCount 3
-$dbbackendpool = New-AzureRmLoadBalancerBackendAddressPoolConfig -Name WebBackEnd
+$dbbackendpool = New-AzureRmLoadBalancerBackendAddressPoolConfig -Name DBBackEnd
 $dbnatrule1 = New-AzureRmLoadBalancerInboundNatRuleConfig -Name DBRule1 -FrontendIpConfigurationId $dbfrontendip.Id `
                 -FrontendPort 4306 -BackendPort 3306 -Protocol Tcp -IdleTimeoutInMinutes 15
 $dbnatrule2 = New-AzureRmLoadBalancerInboundNatRuleConfig -Name DBRule2 -FrontendIpConfigurationId $dbfrontendip.Id `
