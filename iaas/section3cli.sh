@@ -1,12 +1,13 @@
 #!/bin/bash
-group = "PacktPublishing"
-location = "eastus"
+group="PacktPublishing"
+location="eastus"
+vnet="vnet-pack"
 
 # Create the new VNet with three Subnets
-az network vnet create --resource-group $group --location $location --name vnet-pack --address-prefixes "10.0.0.0/24" \
+az network vnet create --resource-group $group --location $location --name $vnet --address-prefixes "10.0.0.0/24" \
         --subnet-name BaseSubnet --subnet-prefix "10.0.0.0/27"
-az network vnet subnet create -resource-group $group --vnet-name vnet-packt --name WebSubnet --address-prefix "10.0.0.32/27"
-az network vnet subnet create -resource-group $group --vnet-name vnet-packt --name DBSubnet --address-prefix "10.0.0.64/27"
+az network vnet subnet create -resource-group $group --vnet-name $vnet --name WebSubnet --address-prefix "10.0.0.32/27"
+az network vnet subnet create -resource-group $group --vnet-name $vnet --name DBSubnet --address-prefix "10.0.0.64/27"
 
 # Create Public IPs for External Load Balancer and Bastion Host
 az network public-ip create --resource-group $group --location $location --name WebLBIP --allocation-method Static \
@@ -15,11 +16,10 @@ az network public-ip create --resource-group $group --location $location --name 
         --version IPv4 
 
 # Only need to create one of the Load Balancers: Internal. The external gets created by the VM Scale Set
-dblb = "PacktDBLB"
-az network lb create --resource-group $group --name $dblb --location $location 
-az network lb frontend-ip create --resource-group $group --name DBFrontEnd --lb-name $dblb \
-        --subnet-vnet-name vnet-pack --subnet-name DBSubnet --private-ip-addess "10.0.0.72"
-az network lb address-pool create --resource-group $group --lb-name $dblb --name DBBackEnd
+dblb="PacktDBLB"
+az network lb create --resource-group $group --name $dblb --location $location --vnet-name $vnet \
+        --subnet DBSubnet --private-ip-address "10.0.0.72" --backend-pool-name DBBackEnd \
+        --frontend-ip-name DBFrontEnd
 az network lb probe create --resource-group $group --lb-name $dblb --name DBHealthProbe --protocol tcp \
         --interval 30 --count 3
 az network lb inbound-nat-rule create --resource-group $group --lb-name $dblb --name DBRule1 --frontend-ip-name DBFrontEnd \

@@ -1,7 +1,7 @@
 #!/bin/bash
-group = "PacktPublishing"
-location = "eastus"
-account = "packttestingstorage"
+group="PacktPublishing"
+location="eastus"
+account="packttestingstorage"
 
 az group create --name $group --location $location
 
