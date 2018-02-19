@@ -2,7 +2,7 @@
 # SQL VM DSC
 #
 
-Configuration SQLVMDSC4R
+Configuration SQLVMDSCPackt
 {
     param 
     (
